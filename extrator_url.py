@@ -58,9 +58,20 @@ class ExtratorURL:
     def __str__(self):
         return self.url + "\nParâmetros: " + self.get_url_parametros() + "\n" + "URL Base: " + self.get_url_base()
 
+    #
+    # Sobrescrita do método eq. Lembrando que igualdade é diferente de identidade. Igualdade é quando dois objetos
+    # possuem o mesmo valor em atributos pré-definidos; identidade é quando dois objetos apontam para o mesmo
+    # endereço de memória.
+    #
+    def __eq__(self, other):
+        return self.url == other.url
+
 url = "http://bytebank.com/cambio?quantidade=100&moedaOrigem=real&moedaDestino=dolar"
 extrator_url = ExtratorURL(url)
 valor_quantidade = extrator_url.get_valor_parametro("quantidade")
 print(valor_quantidade)
 print(f'O tamanho da URL é {len(extrator_url)}')
 print(extrator_url)
+extrator_url2 = ExtratorURL(url)
+print(f"Teste de igualdade de objetos retorna {extrator_url2 == extrator_url}")
+print(f"Teste de identidade de objetos retorna {extrator_url2 is extrator_url}")
